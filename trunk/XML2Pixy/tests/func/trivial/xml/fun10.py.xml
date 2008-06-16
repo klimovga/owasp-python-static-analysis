@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+
+<Module lineno="">
+  <doc>
+    
+  </doc>
+  <node>
+    <Stmt lineno="">
+      <nodes>
+        <Function flags="0" filename="XML2Pixy/tests/func/trivial/fun10.py" lineno="1" name="inline_me">
+          <argnames>
+            str,args
+          </argnames>
+          <code>
+            <Stmt lineno="">
+              <nodes>
+                <Assign lineno="2">
+                  <expr>
+                    <Name lineno="2" name="str">
+                    </Name>
+                  </expr>
+                  <nodes>
+                    <AssName flags="OP_ASSIGN" lineno="2" name="res">
+                    </AssName>
+                  </nodes>
+                </Assign>
+                <For lineno="4">
+                  <assign>
+                    <AssName flags="OP_ASSIGN" lineno="4" name="a">
+                    </AssName>
+                  </assign>
+                  <body>
+                    <Stmt lineno="">
+                      <nodes>
+                        <Assign lineno="5">
+                          <expr>
+                            <Add lineno="5">
+                              <left>
+                                <Name lineno="5" name="res">
+                                </Name>
+                              </left>
+                              <right>
+                                <Name lineno="5" name="a">
+                                </Name>
+                              </right>
+                            </Add>
+                          </expr>
+                          <nodes>
+                            <AssName flags="OP_ASSIGN" lineno="5" name="res">
+                            </AssName>
+                          </nodes>
+                        </Assign>
+                      </nodes>
+                    </Stmt>
+                  </body>
+                  <else_>
+                    
+                  </else_>
+                  <list>
+                    <Name lineno="4" name="args">
+                    </Name>
+                  </list>
+                </For>
+                <Return lineno="7">
+                  <value>
+                    <Name lineno="7" name="res">
+                    </Name>
+                  </value>
+                </Return>
+              </nodes>
+            </Stmt>
+          </code>
+          <decorators>
+            
+          </decorators>
+          <defaults>
+          </defaults>
+          <doc>
+            
+          </doc>
+          <kwargs>
+            
+          </kwargs>
+          <varargs>
+            
+          </varargs>
+        </Function>
+        <Discard lineno="10">
+          <expr>
+            <CallFunc lineno="10">
+              <args>
+                <Const lineno="10" value="foo">
+                </Const>
+                <List lineno="10">
+                  <nodes>
+                    <Const lineno="10" value="1">
+                    </Const>
+                    <Const lineno="10" value="2">
+                    </Const>
+                  </nodes>
+                </List>
+              </args>
+              <dstar_args>
+                
+              </dstar_args>
+              <node>
+                <Name lineno="10" name="inline_me">
+                </Name>
+              </node>
+              <star_args>
+                
+              </star_args>
+            </CallFunc>
+          </expr>
+        </Discard>
+      </nodes>
+    </Stmt>
+  </node>
+</Module>

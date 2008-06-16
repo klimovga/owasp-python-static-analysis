@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+
+<Module lineno="">
+  <doc>
+    
+  </doc>
+  <node>
+    <Stmt lineno="">
+      <nodes>
+        <Class lineno="1" name="A">
+          <bases>
+          </bases>
+          <code>
+            <Stmt lineno="">
+              <nodes>
+                <Function flags="0" filename="C:\\Projects\\Univer\\static\\XML2Pixy\\tests\\func\\complex\\import9\\module.py" lineno="2" name="meth">
+                  <argnames>
+                    self
+                  </argnames>
+                  <code>
+                    <Stmt lineno="">
+                      <nodes>
+                        <Pass lineno="3">
+                        </Pass>
+                      </nodes>
+                    </Stmt>
+                  </code>
+                  <decorators>
+                    
+                  </decorators>
+                  <defaults>
+                  </defaults>
+                  <doc>
+                    
+                  </doc>
+                  <kwargs>
+                    
+                  </kwargs>
+                  <varargs>
+                    
+                  </varargs>
+                </Function>
+              </nodes>
+            </Stmt>
+          </code>
+          <doc>
+            
+          </doc>
+        </Class>
+        <Assign lineno="5">
+          <expr>
+            <CallFunc lineno="5">
+              <args>
+              </args>
+              <dstar_args>
+                
+              </dstar_args>
+              <node>
+                <Name lineno="5" name="A">
+                </Name>
+              </node>
+              <star_args>
+                
+              </star_args>
+            </CallFunc>
+          </expr>
+          <nodes>
+            <AssName flags="OP_ASSIGN" lineno="5" name="variable">
+            </AssName>
+          </nodes>
+        </Assign>
+      </nodes>
+    </Stmt>
+  </node>
+</Module>

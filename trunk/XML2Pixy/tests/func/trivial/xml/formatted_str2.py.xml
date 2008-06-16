@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<Module lineno="">
+  <doc>
+    
+  </doc>
+  <node>
+    <Stmt lineno="">
+      <nodes>
+        <Discard lineno="1">
+          <expr>
+            <Mod lineno="1">
+              <left>
+                <Const lineno="1" value="formatted output: %s %s">
+                </Const>
+              </left>
+              <right>
+                <Tuple lineno="1">
+                  <nodes>
+                    <Const lineno="1" value="Hello">
+                    </Const>
+                    <Const lineno="1" value="World">
+                    </Const>
+                  </nodes>
+                </Tuple>
+              </right>
+            </Mod>
+          </expr>
+        </Discard>
+      </nodes>
+    </Stmt>
+  </node>
+</Module>

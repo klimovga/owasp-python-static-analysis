@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<Module lineno="">
+  <doc>
+    
+  </doc>
+  <node>
+    <Stmt lineno="">
+      <nodes>
+        <From filename="E:\\Panther\\Develop\\Java\\Projects\\static\\XML2Pixy\\tests\\func\\complex\\from1\\main.py" lineno="1" modname="module">
+          <names>foo</names>
+        </From>
+        <Discard lineno="3">
+          <expr>
+            <CallFunc lineno="3">
+              <args>
+              </args>
+              <dstar_args>
+                
+              </dstar_args>
+              <node>
+                <Name lineno="3" name="foo">
+                </Name>
+              </node>
+              <star_args>
+                
+              </star_args>
+            </CallFunc>
+          </expr>
+        </Discard>
+      </nodes>
+    </Stmt>
+  </node>
+</Module>

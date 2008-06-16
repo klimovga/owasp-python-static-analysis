@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+
+<Module lineno="">
+  <doc>
+    
+  </doc>
+  <node>
+    <Stmt lineno="">
+      <nodes>
+        <Function flags="0" filename="E:\\Panther\\Develop\\Java\\Projects\\static\\XML2Pixy\\tests\\func\\complex\\from2\\module.py" lineno="1" name="foo">
+          <argnames>
+                        </argnames>
+          <code>
+            <Stmt lineno="">
+              <nodes>
+                <Pass lineno="2">
+                </Pass>
+              </nodes>
+            </Stmt>
+          </code>
+          <decorators>
+            
+          </decorators>
+          <defaults>
+          </defaults>
+          <doc>
+            
+          </doc>
+          <kwargs>
+            
+          </kwargs>
+          <varargs>
+            
+          </varargs>
+        </Function>
+        <Function flags="0" filename="E:\\Panther\\Develop\\Java\\Projects\\static\\XML2Pixy\\tests\\func\\complex\\from2\\module.py" lineno="4" name="bar">
+          <argnames>
+                        </argnames>
+          <code>
+            <Stmt lineno="">
+              <nodes>
+                <Pass lineno="5">
+                </Pass>
+              </nodes>
+            </Stmt>
+          </code>
+          <decorators>
+            
+          </decorators>
+          <defaults>
+          </defaults>
+          <doc>
+            
+          </doc>
+          <kwargs>
+            
+          </kwargs>
+          <varargs>
+            
+          </varargs>
+        </Function>
+      </nodes>
+    </Stmt>
+  </node>
+</Module>

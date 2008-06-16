@@ -1,0 +1,288 @@
+<?xml version="1.0"?>
+
+<modules-config>
+    <!-- standard functions and modules -->
+    <Module name="__builtin__">
+        <Function name="raw_input"/>
+
+        <Function name="enumerate">
+            <![CDATA[
+function enumerate(&$arr) {
+    $new_arr = array();
+    for ($i = 0; $i < count($arr); $i++) {
+        array_push($new_arr, array($i, $arr[$i]));
+    }
+
+    return $new_arr;
+}
+            ]]>
+        </Function>
+
+        <Function name="float"/>
+
+        <Function name="int">
+            <![CDATA[
+            function int(&$str) {
+                return $str;
+            }
+            ]]>
+        </Function>
+
+        <Function name="len"/>
+        <Function name="long"/>
+        <Function name="max"/>
+        <Function name="min"/>
+        <Function name="open"/>
+        <Function name="range"/>
+        <Function name="str"/>
+
+        <Function name="strip"/>
+
+        <Function name="analysis_vsprintf" inline="true">
+            <![CDATA[
+function analysis_vsprintf($format, $args) {
+    $res = $format;
+
+    for ($i = 0; $i < count($args); $i++) {
+        $res = $res . $args[$i];
+    }
+
+    return $res;
+}
+            ]]>
+        </Function>
+
+        <Function name="analysis_sprintf">
+            <![CDATA[
+function analysis_sprintf(&$format, &$arg) {
+    return $format . $arg;
+}
+            ]]>
+        </Function>
+
+        <Function name="analysis_slice_list">
+            <![CDATA[
+function analysis_slice_list(&$arr, &$start, &$end) {
+    $new_arr = array();
+    for ($i = $start; $i < $end; $i++) {
+        array_push($new_arr, $arr[$i]);
+    }
+
+    return $new_arr;
+}
+            ]]>
+        </Function>
+
+        <!-- XXX: hacks! -->
+        <Function name="__method__strip1">
+            <![CDATA[
+function __method__strip1(&$str) {
+    return $str;
+}
+            ]]>
+        </Function>
+
+        <Function name="__method__join2">
+            <![CDATA[
+function __method__join2(&$arr, &$delim) {
+    /* XXX: it returns hanging delimiter, but it does not matter */ 
+    $res = "";
+    foreach ($arr as $e) {
+        $res = $res . $delim . $e;
+    }
+
+    return $res;
+}
+            ]]>
+        </Function>
+
+        <Function name="logging__warning">
+            <![CDATA[
+function logging__warning(&$str) {
+  /* skipping */
+}
+            ]]>
+        </Function>
+
+        <Function name="logging__info">
+            <![CDATA[
+function logging__info(&$str) {
+  /* skipping */
+}
+            ]]>
+        </Function>
+
+        <Function name="__method__cursor1">
+            <![CDATA[
+function __method__cursor1(&$str) {
+    $self = array("__class_name__" => "MySQLdb.Cursor");
+
+    return $self; 
+}
+            ]]>
+        </Function>
+
+        <Function name="__method__fetchone1">
+            <![CDATA[
+function __method__fetchone1(&$con) {
+    $res = array();
+
+    return $res;
+}
+            ]]>
+        </Function>
+
+        <Function name="__method__isdigit1">
+            <![CDATA[
+function __method__isdigit1(&$str) {
+    /* return true of false non-deterministically */
+    if (raw_input() == 1) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}
+            ]]>
+        </Function>
+
+        <Function name="__method__has_key2">
+            <![CDATA[
+function __method__has_key2(&$arr, &$key) {
+    return array_key_exists($key, $arr);
+}
+            ]]>
+        </Function>
+
+        <Function name="__method__keys1">
+            <![CDATA[
+function __method__keys1(&$arr) {
+    $keys = array();
+    foreach ($arr as $key => $value) {
+        $keys[] = $key;
+    }
+    return $keys;
+}
+            ]]>
+        </Function>
+
+        <Function name="__method__append2">
+            <![CDATA[
+function __method__append2(&$arr, &$value) {
+    return $arr []= $value;
+}
+            ]]>
+        </Function>
+
+        <Function name="__method__replace3">
+            <![CDATA[
+function __method__replace3(&$str, &$old, &$new) {
+    return str_replace($old, $new, $str);
+}
+            ]]>
+        </Function>
+
+        <Function name="__method__sort1">
+            <![CDATA[
+function __method__sort1(&$arr) {
+    return $arr;
+}
+            ]]>
+        </Function>
+
+        <Function name="__method__strftime2">
+            <![CDATA[
+function __method__strftime2(&$date, &$format) {
+    return $format;
+}
+            ]]>
+        </Function>
+
+        <Function name="sql_query">
+            <![CDATA[
+function sql_query($query) {
+    /* sensitive sink! */
+}
+            ]]>
+        </Function>
+
+        <Function name="__method__execute2">
+            <![CDATA[
+function __method__execute2($query, $param) {
+    $q = $query;
+    for ($i = 0; $i < count($param); $i++) {
+        $q = $q . $param[$i];
+    }
+
+    sql_query($q);
+}
+            ]]>
+        </Function>
+
+        <Function name="__method__execute3">
+            <![CDATA[
+function __method__execute3(&$query, &$param1, &$param2) {
+    /* sensitive sink! */
+}
+            ]]>
+        </Function>
+    </Module>
+
+    <Module name="cgi"/>
+    <!--<Module name="const"/>-->
+    <Module name="copy"/>
+    <Module name="datetime">
+        <Function name="timedelta"/>
+        <!-- XXX: hack -->
+        <Function name="datetime__now"/>
+    </Module>
+    <Module name="logging">
+        <Function name="getlogger"/>
+        <Function name="basicConfig"/>
+    </Module>
+    <Module name="math"/>
+    <Module name="md5"/>
+    <Module name="os">
+        <Function name="mkdir"/>
+    </Module>
+    <Module name="os.path">
+        <Function name="exists"/>
+        <Function name="join"/>
+        <Function name="split"/>
+        <Function name="splitext"/>
+    </Module>
+    <Module name="random">
+        <Function name="uniform"/>
+    </Module>
+    <Module name="re"/>
+    <Module name="socket"/>
+    <Module name="stat"/>
+    <Module name="string"/>
+    <Module name="sys"/>
+    <Module name="time">
+        <Function name="sleep"/>
+        <Function name="time"/>
+    </Module>
+    <Module name="types"/>
+    <Module name="urllib"/>
+    <Module name="zipfile"/>
+
+    <Module name="htmllib"/>
+    <Module name="urlparse"/>
+    <Module name="formatter"/>
+    <Module name="htmlentitydefs"/>
+<!--
+    <Module name="xml">
+        <Module name="sax">
+            <Module name="saxutils"/>
+        </Module>
+    </Module>
+-->
+    <Module name="xml.sax.saxutils"/>
+    <Module name="Cookie"/>
+
+    <!-- other modules -->
+    <Module name="MySQLdb">
+        <Function name="connect"/>
+    </Module>
+    <Module name="mp_request"/>
+</modules-config>

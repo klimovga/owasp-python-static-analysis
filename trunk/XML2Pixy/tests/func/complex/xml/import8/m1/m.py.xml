@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+
+<Module lineno="">
+  <doc>
+    
+  </doc>
+  <node>
+    <Stmt lineno="">
+      <nodes>
+        <Import filename="E:\\Panther\\Develop\\Java\\Projects\\static\\XML2Pixy\\tests\\func\\complex\\import8\\m1\\m.py" lineno="1">
+          <names>m2.m</names>
+        </Import>
+        <Function flags="0" filename="E:\\Panther\\Develop\\Java\\Projects\\static\\XML2Pixy\\tests\\func\\complex\\import8\\m1\\m.py" lineno="3" name="foo">
+          <argnames>
+                        </argnames>
+          <code>
+            <Stmt lineno="">
+              <nodes>
+                <Printnl lineno="4">
+                  <dest>
+                    
+                  </dest>
+                  <nodes>
+                    <Const lineno="4" value="m1.m.foo">
+                    </Const>
+                  </nodes>
+                </Printnl>
+              </nodes>
+            </Stmt>
+          </code>
+          <decorators>
+            
+          </decorators>
+          <defaults>
+          </defaults>
+          <doc>
+            
+          </doc>
+          <kwargs>
+            
+          </kwargs>
+          <varargs>
+            
+          </varargs>
+        </Function>
+        <Function flags="0" filename="E:\\Panther\\Develop\\Java\\Projects\\static\\XML2Pixy\\tests\\func\\complex\\import8\\m1\\m.py" lineno="6" name="bar">
+          <argnames>
+                        </argnames>
+          <code>
+            <Stmt lineno="">
+              <nodes>
+                <Discard lineno="7">
+                  <expr>
+                    <CallFunc lineno="7">
+                      <args>
+                      </args>
+                      <dstar_args>
+                        
+                      </dstar_args>
+                      <node>
+                        <Getattr attrname="foo" lineno="7">
+                          <expr>
+                            <Getattr attrname="m" lineno="7">
+                              <expr>
+                                <Name lineno="7" name="m2">
+                                </Name>
+                              </expr>
+                            </Getattr>
+                          </expr>
+                        </Getattr>
+                      </node>
+                      <star_args>
+                        
+                      </star_args>
+                    </CallFunc>
+                  </expr>
+                </Discard>
+              </nodes>
+            </Stmt>
+          </code>
+          <decorators>
+            
+          </decorators>
+          <defaults>
+          </defaults>
+          <doc>
+            
+          </doc>
+          <kwargs>
+            
+          </kwargs>
+          <varargs>
+            
+          </varargs>
+        </Function>
+      </nodes>
+    </Stmt>
+  </node>
+</Module>

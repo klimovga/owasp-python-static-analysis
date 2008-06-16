@@ -1,0 +1,1 @@
+"formatted output: %s %s" % ("Hello", "World")

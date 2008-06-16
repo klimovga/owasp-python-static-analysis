@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+
+<Module lineno="">
+  <doc>
+    
+  </doc>
+  <node>
+    <Stmt lineno="">
+      <nodes>
+        <Import filename="E:\\Panther\\Develop\\Java\\Projects\\static\\XML2Pixy\\tests\\func\\complex\\import8\\main.py" lineno="1">
+          <names>m1.m</names>
+        </Import>
+        <Discard lineno="3">
+          <expr>
+            <CallFunc lineno="3">
+              <args>
+              </args>
+              <dstar_args>
+                
+              </dstar_args>
+              <node>
+                <Getattr attrname="foo" lineno="3">
+                  <expr>
+                    <Getattr attrname="m" lineno="3">
+                      <expr>
+                        <Name lineno="3" name="m1">
+                        </Name>
+                      </expr>
+                    </Getattr>
+                  </expr>
+                </Getattr>
+              </node>
+              <star_args>
+                
+              </star_args>
+            </CallFunc>
+          </expr>
+        </Discard>
+        <Discard lineno="4">
+          <expr>
+            <CallFunc lineno="4">
+              <args>
+              </args>
+              <dstar_args>
+                
+              </dstar_args>
+              <node>
+                <Getattr attrname="bar" lineno="4">
+                  <expr>
+                    <Getattr attrname="m" lineno="4">
+                      <expr>
+                        <Name lineno="4" name="m1">
+                        </Name>
+                      </expr>
+                    </Getattr>
+                  </expr>
+                </Getattr>
+              </node>
+              <star_args>
+                
+              </star_args>
+            </CallFunc>
+          </expr>
+        </Discard>
+      </nodes>
+    </Stmt>
+  </node>
+</Module>

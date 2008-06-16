@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+
+<Module lineno="">
+  <doc>
+    
+  </doc>
+  <node>
+    <Stmt lineno="">
+      <nodes>
+        <TryFinally lineno="1">
+          <body>
+            <Stmt lineno="">
+              <nodes>
+                <Assign lineno="2">
+                  <expr>
+                    <Const lineno="2" value="1">
+                    </Const>
+                  </expr>
+                  <nodes>
+                    <AssName flags="OP_ASSIGN" lineno="2" name="x">
+                    </AssName>
+                  </nodes>
+                </Assign>
+                <Assign lineno="3">
+                  <expr>
+                    <Const lineno="3" value="2">
+                    </Const>
+                  </expr>
+                  <nodes>
+                    <AssName flags="OP_ASSIGN" lineno="3" name="y">
+                    </AssName>
+                  </nodes>
+                </Assign>
+              </nodes>
+            </Stmt>
+          </body>
+          <final>
+            <Stmt lineno="">
+              <nodes>
+                <Assign lineno="5">
+                  <expr>
+                    <Const lineno="5" value="3">
+                    </Const>
+                  </expr>
+                  <nodes>
+                    <AssName flags="OP_ASSIGN" lineno="5" name="z">
+                    </AssName>
+                  </nodes>
+                </Assign>
+              </nodes>
+            </Stmt>
+          </final>
+        </TryFinally>
+      </nodes>
+    </Stmt>
+  </node>
+</Module>

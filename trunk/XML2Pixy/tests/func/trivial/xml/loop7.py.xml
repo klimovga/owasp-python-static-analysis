@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+
+<Module lineno="">
+  <doc>
+    
+  </doc>
+  <node>
+    <Stmt lineno="">
+      <nodes>
+        <Assign lineno="1">
+          <expr>
+            <List lineno="1">
+              <nodes>
+                <Const lineno="1" value="a">
+                </Const>
+              </nodes>
+            </List>
+          </expr>
+          <nodes>
+            <AssName flags="OP_ASSIGN" lineno="1" name="row">
+            </AssName>
+          </nodes>
+        </Assign>
+        <Assign lineno="2">
+          <expr>
+            <Const lineno="2" value="">
+            </Const>
+          </expr>
+          <nodes>
+            <AssName flags="OP_ASSIGN" lineno="2" name="contents">
+            </AssName>
+          </nodes>
+        </Assign>
+        <While lineno="3">
+          <body>
+            <Stmt lineno="">
+              <nodes>
+                <Assign lineno="4">
+                  <expr>
+                    <Subscript flags="OP_APPLY" lineno="4">
+                      <expr>
+                        <Name lineno="4" name="row">
+                        </Name>
+                      </expr>
+                      <subs>
+                        <Const lineno="4" value="0">
+                        </Const>
+                      </subs>
+                    </Subscript>
+                  </expr>
+                  <nodes>
+                    <AssName flags="OP_ASSIGN" lineno="4" name="contents">
+                    </AssName>
+                  </nodes>
+                </Assign>
+                <Assign lineno="5">
+                  <expr>
+                    <List lineno="5">
+                      <nodes>
+                        <Const lineno="5" value="bar">
+                        </Const>
+                      </nodes>
+                    </List>
+                  </expr>
+                  <nodes>
+                    <AssName flags="OP_ASSIGN" lineno="5" name="row">
+                    </AssName>
+                  </nodes>
+                </Assign>
+              </nodes>
+            </Stmt>
+          </body>
+          <else_>
+            
+          </else_>
+          <test>
+            <Name lineno="3" name="row">
+            </Name>
+          </test>
+        </While>
+      </nodes>
+    </Stmt>
+  </node>
+</Module>

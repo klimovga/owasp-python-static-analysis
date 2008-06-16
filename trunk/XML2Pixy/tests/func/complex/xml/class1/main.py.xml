@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+
+<Module lineno="">
+  <doc>
+    
+  </doc>
+  <node>
+    <Stmt lineno="">
+      <nodes>
+        <Import filename="C:\\Projects\\Univer\\static\\XML2Pixy\\tests\\func\\complex\\class1\\main.py" lineno="1">
+          <names>module</names>
+        </Import>
+        <Assign lineno="3">
+          <expr>
+            <Const lineno="3" value="2">
+            </Const>
+          </expr>
+          <nodes>
+            <AssAttr attrname="a" flags="OP_ASSIGN" lineno="3">
+              <expr>
+                <Getattr attrname="A" lineno="3">
+                  <expr>
+                    <Name lineno="3" name="module">
+                    </Name>
+                  </expr>
+                </Getattr>
+              </expr>
+            </AssAttr>
+          </nodes>
+        </Assign>
+        <Printnl lineno="4">
+          <dest>
+            
+          </dest>
+          <nodes>
+            <Getattr attrname="a" lineno="4">
+              <expr>
+                <Getattr attrname="A" lineno="4">
+                  <expr>
+                    <Name lineno="4" name="module">
+                    </Name>
+                  </expr>
+                </Getattr>
+              </expr>
+            </Getattr>
+          </nodes>
+        </Printnl>
+      </nodes>
+    </Stmt>
+  </node>
+</Module>

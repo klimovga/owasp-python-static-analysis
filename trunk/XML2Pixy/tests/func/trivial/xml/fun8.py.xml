@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+
+<Module lineno="">
+  <doc>
+    
+  </doc>
+  <node>
+    <Stmt lineno="">
+      <nodes>
+        <Function flags="0" filename="fun8.py" lineno="1" name="foo">
+          <argnames>
+            a,b,c,d
+          </argnames>
+          <code>
+            <Stmt lineno="">
+              <nodes>
+                <Pass lineno="2">
+                </Pass>
+              </nodes>
+            </Stmt>
+          </code>
+          <decorators>
+            
+          </decorators>
+          <defaults>
+            <Const lineno="1" value="1">
+            </Const>
+            <List lineno="">
+              <nodes>
+              </nodes>
+            </List>
+            <Dict lineno="">
+              <items>
+                <Const lineno="1" value="a">
+                </Const>
+                <Const lineno="1" value="1">
+                </Const>
+              </items>
+            </Dict>
+            <Name lineno="1" name="None">
+            </Name>
+          </defaults>
+          <doc>
+            
+          </doc>
+          <kwargs>
+            
+          </kwargs>
+          <varargs>
+            
+          </varargs>
+        </Function>
+      </nodes>
+    </Stmt>
+  </node>
+</Module>
