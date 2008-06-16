@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+
+<Module lineno="">
+  <doc>
+    
+  </doc>
+  <node>
+    <Stmt lineno="">
+      <nodes>
+        <Function flags="0" filename="fun11.py" lineno="1" name="foo">
+          <argnames>
+            a,b,c
+          </argnames>
+          <code>
+            <Stmt lineno="">
+              <nodes>
+                <Pass lineno="2">
+                </Pass>
+              </nodes>
+            </Stmt>
+          </code>
+          <decorators>
+            
+          </decorators>
+          <defaults>
+            <Const lineno="1" value="1">
+            </Const>
+            <Const lineno="1" value="2">
+            </Const>
+          </defaults>
+          <doc>
+            
+          </doc>
+          <kwargs>
+            
+          </kwargs>
+          <varargs>
+            
+          </varargs>
+        </Function>
+        <Discard lineno="4">
+          <expr>
+            <CallFunc lineno="4">
+              <args>
+                <Const lineno="4" value="3">
+                </Const>
+                <Keyword lineno="4" name="b">
+                  <expr>
+                    <Const lineno="4" value="4">
+                    </Const>
+                  </expr>
+                </Keyword>
+              </args>
+              <dstar_args>
+                
+              </dstar_args>
+              <node>
+                <Name lineno="4" name="foo">
+                </Name>
+              </node>
+              <star_args>
+                
+              </star_args>
+            </CallFunc>
+          </expr>
+        </Discard>
+        <Discard lineno="5">
+          <expr>
+            <CallFunc lineno="5">
+              <args>
+                <Const lineno="5" value="6">
+                </Const>
+                <Keyword lineno="5" name="c">
+                  <expr>
+                    <Const lineno="5" value="7">
+                    </Const>
+                  </expr>
+                </Keyword>
+                <Keyword lineno="5" name="b">
+                  <expr>
+                    <Const lineno="5" value="8">
+                    </Const>
+                  </expr>
+                </Keyword>
+              </args>
+              <dstar_args>
+                
+              </dstar_args>
+              <node>
+                <Name lineno="5" name="foo">
+                </Name>
+              </node>
+              <star_args>
+                
+              </star_args>
+            </CallFunc>
+          </expr>
+        </Discard>
+        <Discard lineno="6">
+          <expr>
+            <CallFunc lineno="6">
+              <args>
+                <Const lineno="6" value="9">
+                </Const>
+                <Keyword lineno="6" name="c">
+                  <expr>
+                    <Const lineno="6" value="10">
+                    </Const>
+                  </expr>
+                </Keyword>
+              </args>
+              <dstar_args>
+                
+              </dstar_args>
+              <node>
+                <Name lineno="6" name="foo">
+                </Name>
+              </node>
+              <star_args>
+                
+              </star_args>
+            </CallFunc>
+          </expr>
+        </Discard>
+      </nodes>
+    </Stmt>
+  </node>
+</Module>

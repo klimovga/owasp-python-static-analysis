@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+
+<Module lineno="">
+  <doc>
+    
+  </doc>
+  <node>
+    <Stmt lineno="">
+      <nodes>
+        <Function flags="0" filename="XML2Pixy/tests/func/trivial/tuple12.py" lineno="1" name="foo">
+          <argnames>
+            x
+          </argnames>
+          <code>
+            <Stmt lineno="">
+              <nodes>
+                <Return lineno="2">
+                  <value>
+                    <Add lineno="2">
+                      <left>
+                        <Name lineno="2" name="x">
+                        </Name>
+                      </left>
+                      <right>
+                        <Const lineno="2" value="1">
+                        </Const>
+                      </right>
+                    </Add>
+                  </value>
+                </Return>
+              </nodes>
+            </Stmt>
+          </code>
+          <decorators>
+            
+          </decorators>
+          <defaults>
+          </defaults>
+          <doc>
+            
+          </doc>
+          <kwargs>
+            
+          </kwargs>
+          <varargs>
+            
+          </varargs>
+        </Function>
+        <Assign lineno="4">
+          <expr>
+            <Tuple lineno="4">
+              <nodes>
+                <CallFunc lineno="4">
+                  <args>
+                    <Const lineno="4" value="1">
+                    </Const>
+                  </args>
+                  <dstar_args>
+                    
+                  </dstar_args>
+                  <node>
+                    <Name lineno="4" name="foo">
+                    </Name>
+                  </node>
+                  <star_args>
+                    
+                  </star_args>
+                </CallFunc>
+                <CallFunc lineno="4">
+                  <args>
+                    <Const lineno="4" value="2">
+                    </Const>
+                  </args>
+                  <dstar_args>
+                    
+                  </dstar_args>
+                  <node>
+                    <Name lineno="4" name="foo">
+                    </Name>
+                  </node>
+                  <star_args>
+                    
+                  </star_args>
+                </CallFunc>
+              </nodes>
+            </Tuple>
+          </expr>
+          <nodes>
+            <AssTuple lineno="4">
+              <nodes>
+                <AssName flags="OP_ASSIGN" lineno="4" name="a">
+                </AssName>
+                <AssName flags="OP_ASSIGN" lineno="4" name="b">
+                </AssName>
+              </nodes>
+            </AssTuple>
+          </nodes>
+        </Assign>
+      </nodes>
+    </Stmt>
+  </node>
+</Module>

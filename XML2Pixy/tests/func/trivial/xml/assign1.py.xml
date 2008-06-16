@@ -1,0 +1,1 @@
+<?xml version="1.0"?><Module lineno=""><doc></doc><node><Stmt lineno=""><nodes><Assign lineno="1"><expr><Name lineno="1" name="None"></Name></expr><nodes><AssName flags="OP_ASSIGN" lineno="1" name="x"></AssName></nodes></Assign></nodes></Stmt></node></Module>

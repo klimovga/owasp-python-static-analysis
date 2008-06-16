@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+
+<Module lineno="">
+  <doc>
+    
+  </doc>
+  <node>
+    <Stmt lineno="">
+      <nodes>
+        <Function flags="0" filename="XML2Pixy/tests/func/trivial/fun8.py" lineno="1" name="foo">
+          <argnames>
+            x            </argnames>
+          <code>
+            <Stmt lineno="">
+              <nodes>
+                <Return lineno="2">
+                  <value>
+                    <Name lineno="2" name="x">
+                    </Name>
+                  </value>
+                </Return>
+              </nodes>
+            </Stmt>
+          </code>
+          <decorators>
+            
+          </decorators>
+          <defaults>
+          </defaults>
+          <doc>
+            
+          </doc>
+          <kwargs>
+            
+          </kwargs>
+          <varargs>
+            
+          </varargs>
+        </Function>
+        <Discard lineno="5">
+          <expr>
+            <CallFunc lineno="5">
+              <args>
+                <Const lineno="5" value="1">
+                </Const>
+              </args>
+              <dstar_args>
+                
+              </dstar_args>
+              <node>
+                <Name lineno="5" name="foo">
+                </Name>
+              </node>
+              <star_args>
+                
+              </star_args>
+            </CallFunc>
+          </expr>
+        </Discard>
+      </nodes>
+    </Stmt>
+  </node>
+</Module>

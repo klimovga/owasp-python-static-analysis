@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<Module lineno="">
+  <doc>
+    
+  </doc>
+  <node>
+    <Stmt lineno="">
+      <nodes>
+        <Assign lineno="1">
+          <expr>
+            <List lineno="1">
+              <nodes>
+                <Const lineno="1" value="1">
+                </Const>
+                <Const lineno="1" value="2">
+                </Const>
+                <Const lineno="1" value="3">
+                </Const>
+              </nodes>
+            </List>
+          </expr>
+          <nodes>
+            <AssName flags="OP_ASSIGN" lineno="1" name="x">
+            </AssName>
+          </nodes>
+        </Assign>
+        <Assign lineno="2">
+          <expr>
+            <Slice flags="OP_APPLY" lineno="2">
+              <expr>
+                <Name lineno="2" name="x">
+                </Name>
+              </expr>
+              <lower>
+                <Const lineno="2" value="0">
+                </Const>
+              </lower>
+              <upper>
+                <Const lineno="2" value="2">
+                </Const>
+              </upper>
+            </Slice>
+          </expr>
+          <nodes>
+            <AssName flags="OP_ASSIGN" lineno="2" name="y">
+            </AssName>
+          </nodes>
+        </Assign>
+      </nodes>
+    </Stmt>
+  </node>
+</Module>

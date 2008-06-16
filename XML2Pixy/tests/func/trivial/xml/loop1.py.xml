@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<Module lineno="">
+    <doc></doc>
+    <node>
+        <Stmt lineno="">
+            <nodes>
+                <While lineno="1">
+                    <body>
+                        <Stmt lineno="">
+                            <nodes>
+                                <If lineno="2">
+                                    <else_>
+                                        <Stmt lineno="">
+                                            <nodes>
+                                                <Assign lineno="5">
+                                                    <expr>
+                                                        <Const lineno="5" value="2"></Const>
+                                                    </expr>
+                                                    <nodes>
+                                                        <AssName flags="OP_ASSIGN" lineno="5" name="k"></AssName>
+                                                    </nodes>
+                                                </Assign>
+                                            </nodes>
+                                        </Stmt>
+                                    </else_>
+                                    <tests>
+                                        <Compare lineno="2">
+                                            <expr>
+                                                <Const lineno="2" value="4"></Const>
+                                            </expr>
+                                            <ops>==
+                                                <Const lineno="2" value="3"></Const>
+                                            </ops>
+                                        </Compare>
+                                        <Stmt lineno="">
+                                            <nodes>
+                                                <Assign lineno="3">
+                                                    <expr>
+                                                        <Const lineno="3" value="1"></Const>
+                                                    </expr>
+                                                    <nodes>
+                                                        <AssName flags="OP_ASSIGN" lineno="3" name="k"></AssName>
+                                                    </nodes>
+                                                </Assign>
+                                            </nodes>
+                                        </Stmt>
+                                    </tests>
+                                </If>
+                            </nodes>
+                        </Stmt>
+                    </body>
+                    <else_></else_>
+                    <test>
+                        <Name lineno="1" name="True"></Name>
+                    </test>
+                </While>
+            </nodes>
+        </Stmt>
+    </node>
+</Module>

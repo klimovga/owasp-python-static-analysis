@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<Module lineno="">
+  <doc>
+    
+  </doc>
+  <node>
+    <Stmt lineno="">
+      <nodes>
+        <Import filename="C:\\Projects\\Univer\\static\\XML2Pixy\\tests\\func\\complex\\import9\\main.py" lineno="1">
+          <names>module</names>
+        </Import>
+        <Discard lineno="3">
+          <expr>
+            <CallFunc lineno="3">
+              <args>
+              </args>
+              <dstar_args>
+                
+              </dstar_args>
+              <node>
+                <Getattr attrname="meth" lineno="3">
+                  <expr>
+                    <Getattr attrname="variable" lineno="3">
+                      <expr>
+                        <Name lineno="3" name="module">
+                        </Name>
+                      </expr>
+                    </Getattr>
+                  </expr>
+                </Getattr>
+              </node>
+              <star_args>
+                
+              </star_args>
+            </CallFunc>
+          </expr>
+        </Discard>
+      </nodes>
+    </Stmt>
+  </node>
+</Module>

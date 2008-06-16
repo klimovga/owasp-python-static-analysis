@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<Module lineno="">
+  <doc>
+    
+  </doc>
+  <node>
+    <Stmt lineno="">
+      <nodes>
+        <From filename="C:\\Projects\\Univer\\static\\XML2Pixy\\tests\\func\\complex\\class2\\main.py" lineno="1" modname="module">
+          <names>A</names>
+        </From>
+        <Assign lineno="3">
+          <expr>
+            <Const lineno="3" value="2">
+            </Const>
+          </expr>
+          <nodes>
+            <AssAttr attrname="a" flags="OP_ASSIGN" lineno="3">
+              <expr>
+                <Name lineno="3" name="A">
+                </Name>
+              </expr>
+            </AssAttr>
+          </nodes>
+        </Assign>
+        <Printnl lineno="4">
+          <dest>
+            
+          </dest>
+          <nodes>
+            <Getattr attrname="a" lineno="4">
+              <expr>
+                <Name lineno="4" name="A">
+                </Name>
+              </expr>
+            </Getattr>
+          </nodes>
+        </Printnl>
+      </nodes>
+    </Stmt>
+  </node>
+</Module>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<Module lineno="">
+  <doc>
+    
+  </doc>
+  <node>
+    <Stmt lineno="">
+      <nodes>
+        <Class lineno="1" name="A">
+          <bases>
+          </bases>
+          <code>
+            <Stmt lineno="">
+              <nodes>
+                <Assign lineno="2">
+                  <expr>
+                    <Const lineno="2" value="1">
+                    </Const>
+                  </expr>
+                  <nodes>
+                    <AssName flags="OP_ASSIGN" lineno="2" name="a">
+                    </AssName>
+                  </nodes>
+                </Assign>
+              </nodes>
+            </Stmt>
+          </code>
+          <doc>
+            
+          </doc>
+        </Class>
+      </nodes>
+    </Stmt>
+  </node>
+</Module>

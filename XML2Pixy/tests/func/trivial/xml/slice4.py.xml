@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+
+<Module lineno="">
+  <doc>
+    
+  </doc>
+  <node>
+    <Stmt lineno="">
+      <nodes>
+        <Discard lineno="1">
+          <expr>
+            <Div lineno="1">
+              <left>
+                <CallFunc lineno="1">
+                  <args>
+                    <CallFunc lineno="1">
+                      <args>
+                        <Slice flags="OP_APPLY" lineno="1">
+                          <expr>
+                            <Name lineno="1" name="guid">
+                            </Name>
+                          </expr>
+                          <lower>
+                            <Const lineno="1" value="0">
+                            </Const>
+                          </lower>
+                          <upper>
+                            <Const lineno="1" value="16">
+                            </Const>
+                          </upper>
+                        </Slice>
+                        <Const lineno="1" value="16">
+                        </Const>
+                      </args>
+                      <dstar_args>
+                        
+                      </dstar_args>
+                      <node>
+                        <Name lineno="1" name="long">
+                        </Name>
+                      </node>
+                      <star_args>
+                        
+                      </star_args>
+                    </CallFunc>
+                  </args>
+                  <dstar_args>
+                    
+                  </dstar_args>
+                  <node>
+                    <Name lineno="1" name="float">
+                    </Name>
+                  </node>
+                  <star_args>
+                    
+                  </star_args>
+                </CallFunc>
+              </left>
+              <right>
+                <Const lineno="1">
+                  <value>
+                    1000.0
+                  </value>
+                </Const>
+              </right>
+            </Div>
+          </expr>
+        </Discard>
+      </nodes>
+    </Stmt>
+  </node>
+</Module>

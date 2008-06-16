@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+
+<Module lineno="">
+  <doc>
+    
+  </doc>
+  <node>
+    <Stmt lineno="">
+      <nodes>
+        <Function flags="0" filename="E:\\Panther\\Develop\\Java\\Projects\\static\\XML2Pixy\\tests\\func\\complex\\import7\\m2\\m.py" lineno="1" name="foo">
+          <argnames>
+                        </argnames>
+          <code>
+            <Stmt lineno="">
+              <nodes>
+                <Printnl lineno="2">
+                  <dest>
+                    
+                  </dest>
+                  <nodes>
+                    <Const lineno="2" value="m2.m.foo">
+                    </Const>
+                  </nodes>
+                </Printnl>
+              </nodes>
+            </Stmt>
+          </code>
+          <decorators>
+            
+          </decorators>
+          <defaults>
+          </defaults>
+          <doc>
+            
+          </doc>
+          <kwargs>
+            
+          </kwargs>
+          <varargs>
+            
+          </varargs>
+        </Function>
+      </nodes>
+    </Stmt>
+  </node>
+</Module>

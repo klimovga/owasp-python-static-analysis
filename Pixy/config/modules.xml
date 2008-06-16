@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<modules-config>
+    <Module name="__builtin__">
+        <Function name="raw_input"/>
+    </Module>
+    <Module name="sys"/>
+</modules-config>

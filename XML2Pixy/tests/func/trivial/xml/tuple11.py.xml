@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+
+<Module lineno="">
+  <doc>
+    
+  </doc>
+  <node>
+    <Stmt lineno="">
+      <nodes>
+        <Function flags="0" filename="XML2Pixy/tests/func/trivial/tuple11.py" lineno="1" name="foo">
+          <argnames>
+            
+          </argnames>
+          <code>
+            <Stmt lineno="">
+              <nodes>
+                <Return lineno="2">
+                  <value>
+                    <List lineno="2">
+                      <nodes>
+                        <Const lineno="2" value="1">
+                        </Const>
+                        <Const lineno="2" value="2">
+                        </Const>
+                      </nodes>
+                    </List>
+                  </value>
+                </Return>
+              </nodes>
+            </Stmt>
+          </code>
+          <decorators>
+            
+          </decorators>
+          <defaults>
+          </defaults>
+          <doc>
+            
+          </doc>
+          <kwargs>
+            
+          </kwargs>
+          <varargs>
+            
+          </varargs>
+        </Function>
+        <Assign lineno="4">
+          <expr>
+            <Subscript flags="OP_APPLY" lineno="4">
+              <expr>
+                <CallFunc lineno="4">
+                  <args>
+                  </args>
+                  <dstar_args>
+                    
+                  </dstar_args>
+                  <node>
+                    <Name lineno="4" name="foo">
+                    </Name>
+                  </node>
+                  <star_args>
+                    
+                  </star_args>
+                </CallFunc>
+              </expr>
+              <subs>
+                <Const lineno="4" value="1">
+                </Const>
+              </subs>
+            </Subscript>
+          </expr>
+          <nodes>
+            <AssName flags="OP_ASSIGN" lineno="4" name="x">
+            </AssName>
+          </nodes>
+        </Assign>
+      </nodes>
+    </Stmt>
+  </node>
+</Module>
