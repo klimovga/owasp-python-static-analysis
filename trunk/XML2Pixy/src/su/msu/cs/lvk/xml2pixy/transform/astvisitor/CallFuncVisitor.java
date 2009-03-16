@@ -134,7 +134,7 @@ public class CallFuncVisitor extends ASTVisitor {
             Symbol symbol = symbolTable.getSymbol(calleeName);
             if (symbol != null) {
                 if (symbol.getModule().equals(SymbolTable.BUILTIN_MODULE)) {
-                    fullName = calleeName;
+                    fullName = "__builtin____" + calleeName;
                 } else {
                     fullName = symbol.getModule() + "__" + calleeName;
                 }

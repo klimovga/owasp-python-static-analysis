@@ -36,14 +36,16 @@ public class CompareVisitor extends ASTVisitor {
                     "expr_without_variable", currentFile);
             expression.addChild(expr_without_variable);
 
-            ParseNode pnOp = makeCompare(node, lineno);
+            String operation = ops.getJdomElement().getTextTrim();
+
+            ParseNode pnOp = makeCompare(operation, lineno);
             if (pnOp != null) {
                 expr_without_variable.addChild(left);
                 expr_without_variable.addChild(pnOp);
                 expr_without_variable.addChild(right);
-            } else if (ops.getJdomElement().getTextTrim().equals("in")) { // "in" operator
+            } else if (operation.equals("in")) { // "in" operator
                 expression = makeFunctionCall("in_array", new ParseNode[]{ left, right } , null, lineno);
-            } else if (ops.getJdomElement().getTextTrim().equals("not in")) { // "not in" operator
+            } else if (operation.equals("not in")) { // "not in" operator
                 expr_without_variable.addChild(new ParseNode(PhpSymbols.T_NOT, "T_NOT", currentFile, "!", lineno));
                 expr_without_variable.addChild(makeFunctionCall("in_array", new ParseNode[]{ left, right } , null, lineno));
             } else {

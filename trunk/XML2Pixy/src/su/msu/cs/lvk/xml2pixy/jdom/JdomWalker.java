@@ -98,7 +98,7 @@ public class JdomWalker {
      * @param root jdom element
      * @return built list of children Nodes
      */
-    private List<Node> buildList(Element root) {
+    public List<Node> buildList(Element root) {
         Node rootNode = new Node(root);
         ArrayList<Node> nodes = new ArrayList<Node>();
         nodes.add(rootNode);

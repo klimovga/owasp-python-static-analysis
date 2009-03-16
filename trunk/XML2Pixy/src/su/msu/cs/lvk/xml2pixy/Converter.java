@@ -20,16 +20,17 @@ import java.util.Map;
 // TODO comment everything
 
 /**
- * Main class used to run taint analysis on .py.xml and .php files. 
+ * Main class used to run taint analysis on .py.xml and .php files.
  */
 public class Converter {
-    public static final String LOG_CONFIG_FILE="log4j.properties";
+    public static final String LOG_CONFIG_FILE = "log4j.properties";
     public static String mainFile;
     public static Document modulesConfig;
     private static Logger log = Logger.getLogger(Converter.class.getName());
 
     /**
      * Read modules.xml file, containing headers for builtin modules, functions, classes
+     *
      * @param cfgFile config file name (<code>modules.xml</code>)
      */
     public static void readModulesConfig(String cfgFile) {
@@ -88,7 +89,7 @@ public class Converter {
         // Build ParseNode tree. From php source file, if it is .php, or from python source
         // if it is .py.xml
         ParseNode rootParseNode = !PixyConverter.isPhpFile(mainFile)
-                ? Utils.buildParseTree(mainFile)
+                ? Utils.transformPython(mainFile)
                 : new PixyConverter(false, true).parse(mainFile).getRoot();
 
         // Print parse node
@@ -134,6 +135,7 @@ public class Converter {
 
     /**
      * Checks whether the main argument file exists and is file (not directory).
+     *
      * @param arg main argument file name
      * @return File object, associated with the main argument
      */

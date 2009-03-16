@@ -12,6 +12,10 @@ import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
+import su.msu.cs.lvk.xml2pixy.ast.ASTNode;
+import su.msu.cs.lvk.xml2pixy.ast.Visitor;
+import su.msu.cs.lvk.xml2pixy.ast.Walker;
+import su.msu.cs.lvk.xml2pixy.ast.python.ModuleNode;
 import su.msu.cs.lvk.xml2pixy.jdom.JdomVisitor;
 import su.msu.cs.lvk.xml2pixy.jdom.JdomWalker;
 import su.msu.cs.lvk.xml2pixy.jdom.SymbolTableBuilder;
@@ -19,8 +23,10 @@ import su.msu.cs.lvk.xml2pixy.parser.ParseNodePrinter;
 import su.msu.cs.lvk.xml2pixy.parser.ParseNodeVisitor;
 import su.msu.cs.lvk.xml2pixy.parser.ParseNodeWalker;
 import su.msu.cs.lvk.xml2pixy.postproc.*;
+import su.msu.cs.lvk.xml2pixy.simple.ProcessingUtils;
 import su.msu.cs.lvk.xml2pixy.transform.Node;
 import su.msu.cs.lvk.xml2pixy.transform.ParseNodeBuilder;
+import su.msu.cs.lvk.xml2pixy.transform.PyPhpTransformer;
 import su.msu.cs.lvk.xml2pixy.transform.SymbolTable;
 import su.msu.cs.lvk.xml2pixy.transform.astvisitor.ASTVisitor;
 import su.msu.cs.lvk.xml2pixy.transform.classes.ClassManager;
@@ -29,10 +35,7 @@ import su.msu.cs.lvk.xml2pixy.transform.function.Function;
 import su.msu.cs.lvk.xml2pixy.transform.function.FunctionManager;
 import su.msu.cs.lvk.xml2pixy.transform.function.Method;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -45,9 +48,11 @@ import java.util.Map;
 public class Utils {
 
     protected static Logger log = Logger.getLogger(Utils.class.getName());
+    private static int BUFFER_SIZE = 4096; 
 
     /**
      * Trims input string. Returns empty string if argument is empty or null.
+     *
      * @param str input string
      * @return trimmed string
      */
@@ -57,6 +62,7 @@ public class Utils {
 
     /**
      * Trims input string. Returns null if argument is empty or null.
+     *
      * @param str input string
      * @return trimmed string
      */
@@ -67,6 +73,7 @@ public class Utils {
 
     /**
      * Tests input string if it is null or contains only non-printable characters.
+     *
      * @param str input string
      * @return <code>true</code> if input string is blank, <code>false</code> otherwise.
      */
@@ -74,8 +81,19 @@ public class Utils {
         return str == null || str.trim().equals("");
     }
 
+    public static String afterLast(String str, char ch) {
+        if (str == null) return null;
+        return str.substring(str.lastIndexOf(ch) + 1);
+    }
+
+    public static String afterLast(String str, String str2) {
+        if (str == null) return null;
+        return str2 == null ? str : str.substring(str.lastIndexOf(str2) + str2.length());
+    }
+
     /**
      * Prints argument parse tree to System.out without any comments. The output is formatted.
+     *
      * @param node argument parse tree
      */
     public static void printTree(ParseNode node) {
@@ -85,17 +103,32 @@ public class Utils {
     /**
      * Prints argument parse tree to System.out with line-by-line comments. The output is not formatted
      * since comments are source lineno relative.
-     * @param node argument parse tree
+     *
+     * @param node     argument parse tree
      * @param comments map lineno -> StringWriter, which contains comment strings.
      */
     public static void printTree(ParseNode node, Map<Integer, StringWriter> comments) {
-        ParseNodePrinter pnPrinter = new ParseNodePrinter(System.out, comments);
+        printTree(node, comments, System.out);
+    }
+
+
+    /**
+     * Prints argument parse tree to specified OutputStream with line-by-line comments. The output is not formatted
+     * since comments are source lineno relative.
+     *
+     * @param node     argument parse tree
+     * @param comments map lineno -> StringWriter, which contains comment strings.
+     * @param os       OutputStream to print into
+     */
+    public static void printTree(ParseNode node, Map<Integer, StringWriter> comments, OutputStream os) {
+        ParseNodePrinter pnPrinter = new ParseNodePrinter(os, comments);
         ParseNodeWalker pnWalker = new ParseNodeWalker(pnPrinter);
         pnWalker.walk(node);
     }
 
     /**
      * Calculates lineno of the leftmost lexeme of provided parse node.
+     *
      * @param node parse tree
      * @return lineno of the leftmost lexeme or -2 if is is unavailable or <0.
      */
@@ -105,8 +138,9 @@ public class Utils {
 
     /**
      * Calculates lineno of the leftmost lexeme of provided parse node.
+     *
      * @param node parse tree
-     * @param def default value
+     * @param def  default value
      * @return lineno of the leftmost lexeme or default value if is is unavailable or <0.
      */
     public static int getLinenoLeft(ParseNode node, int def) {
@@ -124,6 +158,7 @@ public class Utils {
      * Calculates lineno of the rightmost lexeme with positive lineno of provided parse node.
      * Sometimes the rightmost lexeme is T_EPSILON with lineno == -2. If so, the previous lexeme
      * is taken.
+     *
      * @param node parse tree
      * @return lineno of the rightmost lexeme or -2 if is is unavailable or <0.
      */
@@ -135,8 +170,9 @@ public class Utils {
      * Calculates lineno of the rightmost lexeme with positive lineno of provided parse node.
      * Sometimes the rightmost lexeme is T_EPSILON with lineno == -2. If so, the previous lexeme
      * is taken.
+     *
      * @param node parse tree
-     * @param def default value
+     * @param def  default value
      * @return lineno of the rightmost lexeme or default value if is is unavailable or <0.
      */
     public static int getLinenoRight(ParseNode node, int def) {
@@ -216,9 +252,24 @@ public class Utils {
         }
     }
 
+    public static ParseNode transformPython(String file) {
+        ASTVisitor.reset();
+        try {
+            ModuleNode node = ProcessingUtils.parseFile(file);
+            ModuleNode woGens = ProcessingUtils.simplifyGenerators(node);
+            ProcessingUtils.processScopes(woGens);
+            ModuleNode after = ProcessingUtils.simplifyPython(woGens, true);
+            return Utils.buildParseTree(after);
+        } catch (Exception e) {
+            log.error("Error during processing has occured: ", e);
+            return null;
+        }
+
+    }
 
     /**
      * Builds parse tree from file provided in the argument.
+     *
      * @param file filename to parse
      * @return resulting ParseNode treee
      */
@@ -226,9 +277,17 @@ public class Utils {
         return buildParseTree(file, true);
     }
 
+    public static ParseNode buildParseTree(ASTNode root) {
+        Visitor visitor = new PyPhpTransformer();
+        Walker walker = new Walker(visitor);
+        ASTNode after = walker.walkWideReverse(root);
+        return after.getPhpNode();
+    }
+
     /**
      * Resets every Builds parse tree from file provided in the argument.
-     * @param file filename to parse
+     *
+     * @param file         filename to parse
      * @param needBuiltins do we need render built-in functions?
      * @return resulting ParseNode treee
      */
@@ -265,9 +324,10 @@ public class Utils {
 
     /**
      * Resets every Builds parse tree from file provided in the argument using provided symbol table.
-     * @param file filename to parse
+     *
+     * @param file     filename to parse
      * @param symTable symbol table
-     * @param module current module name
+     * @param module   current module name
      * @return resulting ParseNode treee
      */
     public static ParseNode buildParseTree(String file, SymbolTable symTable, String module) {
@@ -279,7 +339,7 @@ public class Utils {
         try {
             // Parse .xml file using JDOM
             SAXBuilder parser = new SAXBuilder();
-            Document doc = parser.build(new File(file));
+            Document doc = parser.build(getFileStream(file));
             Element root = doc.getRootElement();
 
             // Walk through JDOM tree and build parse nodes for every jdom node.
@@ -296,8 +356,9 @@ public class Utils {
 
     /**
      * Render function declarations and add them to beginning of the code in parse tree
-     * @param S - destination <code>PhpSymbols.S</code> parse node
-     * @param file file name used to construct non-terminal parse nodes
+     *
+     * @param S            - destination <code>PhpSymbols.S</code> parse node
+     * @param file         file name used to construct non-terminal parse nodes
      * @param needBuiltins do we need to load and render built-in functions
      * @return S parse node with rendered declarations
      */
@@ -412,7 +473,8 @@ public class Utils {
 
     /**
      * Parses php source code and find declaration_statement of function <code>name</code>
-     * @param name name of function to find
+     *
+     * @param name    name of function to find
      * @param phpCode php source code
      * @return declaration_statement parse node or null if it is not found or function name is not <code>name</code>
      * @throws Exception
@@ -446,6 +508,7 @@ public class Utils {
 
     /**
      * Find first declaration_statement node among provided parsenode children.
+     *
      * @param node some parse node
      * @return declaration_statement node if found, null otherwise
      */
@@ -468,6 +531,7 @@ public class Utils {
 
     /**
      * Builds symbol table for provided file.
+     *
      * @param file filename of processed file
      * @return built symbol table
      */
@@ -477,15 +541,16 @@ public class Utils {
 
     /**
      * Builds symbol table for provided file. If <code>symbolTable</code> is provided, adds new lexemes to it.
-     * @param file filename of processed file
+     *
+     * @param file        filename of processed file
      * @param symbolTable symbol table to use. If null, new one will be created
-     * @param module current module name
+     * @param module      current module name
      * @return built sybmol table
      */
     public static SymbolTable buildSymbolTable(String file, SymbolTable symbolTable, String module) {
         try {
             SAXBuilder parser = new SAXBuilder();
-            Document doc = parser.build(new File(file));
+            Document doc = parser.build(getFileStream(file));
             Element root = doc.getRootElement();
 
             SymbolTableBuilder symTableBuilder = new SymbolTableBuilder(symbolTable, file, module);
@@ -502,7 +567,8 @@ public class Utils {
 
     /**
      * Renames all the <code>oldLexemes</code> lexemes in the tree to <code>newLexeme</code>
-     * @param tree parse tree walk throug
+     *
+     * @param tree      parse tree walk throug
      * @param oldLexeme old lexeme string
      * @param newLexeme new lexeme string
      */
@@ -515,6 +581,49 @@ public class Utils {
             }
         });
         walker.walk(tree);
+    }
+
+    public static InputStream getFileStream(String file) throws IOException {
+        // TODO platform independent
+        String ext = file.substring(file.lastIndexOf(".") + 1);
+        if ("py".equals(ext)) {
+
+            Runtime rt = Runtime.getRuntime();
+            Process proc = rt.exec(new String[]{
+                    "pyparser.bat",
+                    file
+            });
+            byte[] bytes = fullRead(proc.getInputStream());
+            return new ByteArrayInputStream(bytes);
+        } else {
+            return new BufferedInputStream(new FileInputStream(file));
+        }
+    }
+
+    public static byte[] fullRead(InputStream input) throws IOException {
+
+        byte[] buf = new byte[BUFFER_SIZE];
+        byte[] out = new byte[0];
+        int count;
+        while ((count = input.read(buf)) > 0) {
+            out = append(out, buf, count);
+        }
+        return out; 
+    }
+
+    public static byte[] append(byte[] array1, byte[] array2, int count) {
+        if (array1 == null) array1 = new byte[0];
+        if (array2 == null) array2 = new byte[0];
+        byte[] out = new byte[array1.length + count];
+        System.arraycopy(array1, 0, out, 0, array1.length);
+        System.arraycopy(array2, 0, out, array1.length, count);
+        return out;
+    }
+
+    public static String toString(Printable printable) {
+        ByteArrayOutputStream buf = new ByteArrayOutputStream();
+        printable.print(new PrintStream(buf));
+        return new String(buf.toByteArray());
     }
 
 }

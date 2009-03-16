@@ -119,4 +119,5 @@ min=3
 
 ############################## evil functions (4)
 
+__builtin____raw_input=4
 

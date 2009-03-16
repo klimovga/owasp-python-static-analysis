@@ -226,6 +226,7 @@ public class ParseNodeHelper {
 
     /**
      * Creates ParseNode by symbol code using current set filepath.
+     *
      * @param symbol php symbol code to create
      * @return created node
      */
@@ -235,8 +236,9 @@ public class ParseNodeHelper {
 
     /**
      * Creates ParseNode by symbol code using current set filepath and adds one child to it.
+     *
      * @param symbol php symbol code to create
-     * @param child child node
+     * @param child  child node
      * @return created node
      */
     public ParseNode create(int symbol, ParseNode child) {
@@ -250,7 +252,8 @@ public class ParseNodeHelper {
 
     /**
      * Creates ParseNode by symbol code using current set filepath and adds some children to it.
-     * @param symbol php symbol code to create
+     *
+     * @param symbol   php symbol code to create
      * @param children children nodes
      * @return created node
      */
@@ -265,8 +268,9 @@ public class ParseNodeHelper {
 
     /**
      * Creates token node by symbol code, lexeme and line number using current filepath.
+     *
      * @param symbol symbol code
-     * @param value lexeme
+     * @param value  lexeme
      * @param lineno line number
      * @return created token node
      */
@@ -284,8 +288,9 @@ public class ParseNodeHelper {
      * Makes linked list of ParseNodes corresponding to given array of symbol codes. The deepest
      * element is <code>leaf</code>
      * I.e. <code>createChain(new int[]{PhpSymbols.scalar, PhpSymbols.common_scalar}, create(PhpSymbols.T_STRING, "a", 1))</code
+     *
      * @param symbols array of symbol codes
-     * @param leaf the deepest element
+     * @param leaf    the deepest element
      * @return root of created list
      */
     public ParseNode createChain(int[] symbols, ParseNode leaf) {
@@ -304,7 +309,8 @@ public class ParseNodeHelper {
 
     /**
      * Checks if all children node symbold are correct using given php symbol codes
-     * @param node root node
+     *
+     * @param node  root node
      * @param types PhpSymbol codes
      * @return true if all children are correct, false otherwise
      */
@@ -325,7 +331,7 @@ public class ParseNodeHelper {
     /**
      * Traverse by first children checking node types.
      *
-     * @param root root parse node
+     * @param root  root parse node
      * @param names string values of php grammar symbols
      * @return node, corresponding the last <code>names</code> argument
      */
@@ -349,9 +355,10 @@ public class ParseNodeHelper {
 
     /**
      * Traverse by given children, checking node types.
+     *
      * @param root root parse node
      * @param args sequence of index1, name1, index2, name2, ...,
-     *   where index is an integer index in tree and name is a name of node
+     *             where index is an integer index in tree and name is a name of node
      * @return parse node if reachable
      */
     public ParseNode traverse(ParseNode root, Object... args) {
@@ -445,4 +452,16 @@ public class ParseNodeHelper {
     public void setCurrentFile(String currentFile) {
         this.currentFile = currentFile;
     }
+
+    public ParseNode createNull(int lineno) {
+        return createChain(
+                new int[]{
+                        PhpSymbols.expr,
+                        PhpSymbols.expr_without_variable,
+                        PhpSymbols.scalar
+                },
+                create(PhpSymbols.T_STRING, "null", lineno)
+        );
+    }
+
 }

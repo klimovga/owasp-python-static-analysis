@@ -3,6 +3,7 @@ package su.msu.cs.lvk.xml2pixy.transform;
 import at.ac.tuwien.infosys.www.phpparser.ParseNode;
 import org.jdom.Element;
 import su.msu.cs.lvk.xml2pixy.Utils;
+import su.msu.cs.lvk.xml2pixy.ast.ASTNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ public class Node {
     private Element jdomElement;
     private ParseNode parseNode;
     private List<Node> children;
+    private ASTNode astNode;
 
     public Node() {
         children = new ArrayList<Node>();
@@ -59,6 +61,14 @@ public class Node {
     public void addChild(int index, Node node) {
         if (children == null) children = new ArrayList<Node>();
         children.add(node);
+    }
+
+    public ASTNode getAstNode() {
+        return astNode;
+    }
+
+    public void setAstNode(ASTNode astNode) {
+        this.astNode = astNode;
     }
 
     /**

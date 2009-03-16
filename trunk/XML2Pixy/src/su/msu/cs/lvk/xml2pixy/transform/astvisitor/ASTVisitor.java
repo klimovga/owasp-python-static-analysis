@@ -9,7 +9,9 @@ import org.jdom.DataConversionException;
 import org.jdom.Element;
 import su.msu.cs.lvk.xml2pixy.Converter;
 import su.msu.cs.lvk.xml2pixy.Utils;
+import su.msu.cs.lvk.xml2pixy.jdom.ModuleHandler;
 import su.msu.cs.lvk.xml2pixy.parser.ParseNodeHelper;
+import su.msu.cs.lvk.xml2pixy.simple.classes.ClassUtils;
 import su.msu.cs.lvk.xml2pixy.transform.Node;
 import su.msu.cs.lvk.xml2pixy.transform.Symbol;
 import su.msu.cs.lvk.xml2pixy.transform.SymbolTable;
@@ -109,7 +111,7 @@ public class ASTVisitor {
             ParseNode right = makeExprInBraces(rightChild.getParseNode());
             ParseNode expr_wo_var = helper.create(PhpSymbols.expr_without_variable,
                     left,
-                    getBinaryOperation(node, lineno),
+                    getBinaryOperation(node.getJdomElement().getName(), lineno),
                     right);
 
             return helper.create(PhpSymbols.expr, expr_wo_var);
@@ -118,8 +120,7 @@ public class ASTVisitor {
         return null;
     }
 
-    protected ParseNode getBinaryOperation(Node node, int lineno) throws VisitorException {
-        String name = node.getJdomElement().getName();
+    protected ParseNode getBinaryOperation(String name, int lineno) throws VisitorException {
         int symbol;
         String lexeme;
         if (name.equals("Add")) {
@@ -158,7 +159,7 @@ public class ASTVisitor {
         if (expression != null) {
 
             ParseNode expr_wo_var = helper.create(PhpSymbols.expr_without_variable,
-                    getUnaryOperation(node, lineno),
+                    getUnaryOperation(node.getJdomElement().getName(), lineno),
                     makeExprInBraces(expression));
             return helper.create(PhpSymbols.expr, expr_wo_var);
         }
@@ -176,8 +177,7 @@ public class ASTVisitor {
                 helper.create(PhpSymbols.T_LNUMBER, String.valueOf(value), lineno));
     }
 
-    protected ParseNode getUnaryOperation(Node node, int lineno) throws VisitorException {
-        String name = node.getJdomElement().getName();
+    protected ParseNode getUnaryOperation(String name, int lineno) throws VisitorException {
         int symbol;
         String lexeme;
         if (name.equals("UnaryAdd")) {
@@ -217,7 +217,7 @@ public class ASTVisitor {
                     root = helper.create(PhpSymbols.expr,
                             helper.create(PhpSymbols.expr_without_variable,
                                     makeExprInBraces(root),
-                                    getNaryOperation(node, lineno),
+                                    getNaryOperation(node.getJdomElement().getName(), lineno),
                                     makeExprInBraces(child.getParseNode())
                             ));
                 }
@@ -227,8 +227,7 @@ public class ASTVisitor {
         return null;
     }
 
-    protected ParseNode getNaryOperation(Node node, int lineno) throws VisitorException {
-        String name = node.getJdomElement().getName();
+    protected ParseNode getNaryOperation(String name, int lineno) throws VisitorException {
         int symbol;
         String lexeme;
         if (name.equals("And")) {
@@ -265,10 +264,7 @@ public class ASTVisitor {
                 ));
     }
 
-    protected ParseNode makeCompare(Node compare, int lineno) {
-        Node ops = getFirstChild(compare, "ops");
-        if (ops == null) return null;
-        String operation = getFirstChild(compare, "ops").getJdomElement().getTextTrim();
+    protected ParseNode makeCompare(String operation, int lineno) {
         int symbol;
         String lexeme;
         if (Utils.isBlank(operation))
@@ -446,6 +442,9 @@ public class ASTVisitor {
         }
 
         ImportVisitor.builtins = ImportVisitor.imported.size();
+
+        ModuleHandler.init();
+        ClassUtils.init();
     }
 
     public ParseNode makeEpsilon() {
@@ -536,17 +535,17 @@ public class ASTVisitor {
     protected ParseNode[] getArgs(String functionName, Node argsNode, int lineno) throws VisitorException {
 
         /*
-        Что надо сделать предварительно?
-        1. Сделать получение полных сигнатур функций на этапе постоения таблицы символов.
-            Т.к. список аргументов и их дефолтных значений нужен раньше их получения. Вот это и есть сложно,
-            по крайней мере долго, хотя в общем все для этого есть (дефолтные значения без постоения parse node'ов).
+        Р§С‚Рѕ РЅР°РґРѕ СЃРґРµР»Р°С‚СЊ РїСЂРµРґРІР°СЂРёС‚РµР»СЊРЅРѕ?
+        1. РЎРґРµР»Р°С‚СЊ РїРѕР»СѓС‡РµРЅРёРµ РїРѕР»РЅС‹С… СЃРёРіРЅР°С‚СѓСЂ С„СѓРЅРєС†РёР№ РЅР° СЌС‚Р°РїРµ РїРѕСЃС‚РѕРµРЅРёСЏ С‚Р°Р±Р»РёС†С‹ СЃРёРјРІРѕР»РѕРІ.
+            Рў.Рє. СЃРїРёСЃРѕРє Р°СЂРіСѓРјРµРЅС‚РѕРІ Рё РёС… РґРµС„РѕР»С‚РЅС‹С… Р·РЅР°С‡РµРЅРёР№ РЅСѓР¶РµРЅ СЂР°РЅСЊС€Рµ РёС… РїРѕР»СѓС‡РµРЅРёСЏ. Р’РѕС‚ СЌС‚Рѕ Рё РµСЃС‚СЊ СЃР»РѕР¶РЅРѕ,
+            РїРѕ РєСЂР°Р№РЅРµР№ РјРµСЂРµ РґРѕР»РіРѕ, С…РѕС‚СЏ РІ РѕР±С‰РµРј РІСЃРµ РґР»СЏ СЌС‚РѕРіРѕ РµСЃС‚СЊ (РґРµС„РѕР»С‚РЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ Р±РµР· РїРѕСЃС‚РѕРµРЅРёСЏ parse node'РѕРІ).
 
-        После этого дело техники (небольшое изменение метода ASTVisitor.getArgs()):
-        1. Добавить параметр: сигнатуру функции (объект Function).
-        2. Отсортировать keyword-аргументы в соответствии с сигнатурой функции.
-        3. Добавить недостающие аргументы и заполнить их значениями по-умолчанию.
+        РџРѕСЃР»Рµ СЌС‚РѕРіРѕ РґРµР»Рѕ С‚РµС…РЅРёРєРё (РЅРµР±РѕР»СЊС€РѕРµ РёР·РјРµРЅРµРЅРёРµ РјРµС‚РѕРґР° ASTVisitor.getArgs()):
+        1. Р”РѕР±Р°РІРёС‚СЊ РїР°СЂР°РјРµС‚СЂ: СЃРёРіРЅР°С‚СѓСЂСѓ С„СѓРЅРєС†РёРё (РѕР±СЉРµРєС‚ Function).
+        2. РћС‚СЃРѕСЂС‚РёСЂРѕРІР°С‚СЊ keyword-Р°СЂРіСѓРјРµРЅС‚С‹ РІ СЃРѕРѕС‚РІРµС‚СЃС‚РІРёРё СЃ СЃРёРіРЅР°С‚СѓСЂРѕР№ С„СѓРЅРєС†РёРё.
+        3. Р”РѕР±Р°РІРёС‚СЊ РЅРµРґРѕСЃС‚Р°СЋС‰РёРµ Р°СЂРіСѓРјРµРЅС‚С‹ Рё Р·Р°РїРѕР»РЅРёС‚СЊ РёС… Р·РЅР°С‡РµРЅРёСЏРјРё РїРѕ-СѓРјРѕР»С‡Р°РЅРёСЋ.
 
-        KeywordVisitor: просто закомментировать тело метода visit() - для него parseNode строить не надо.
+        KeywordVisitor: РїСЂРѕСЃС‚Рѕ Р·Р°РєРѕРјРјРµРЅС‚РёСЂРѕРІР°С‚СЊ С‚РµР»Рѕ РјРµС‚РѕРґР° visit() - РґР»СЏ РЅРµРіРѕ parseNode СЃС‚СЂРѕРёС‚СЊ РЅРµ РЅР°РґРѕ.
          */
         List<Node> nodes = argsNode.getChildren();
         ParseNode[] args;
@@ -722,6 +721,9 @@ public class ASTVisitor {
 
                 if (child.getSymbol() == PhpSymbols.expr) {
                     child = child.getChild(0);
+                    if (child.getSymbol() == PhpSymbols.r_cvar) {
+                        child = child.getChild(0);
+                    }
                 }
 
                 non_empty_function_call_parameter_list.addChild(makeCvar(child));

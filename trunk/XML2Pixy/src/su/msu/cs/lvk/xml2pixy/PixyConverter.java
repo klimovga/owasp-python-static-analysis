@@ -33,7 +33,7 @@ public class PixyConverter extends ProgramConverter {
             throw new RuntimeException(e.getMessage());
         }
 
-        return new ParseTree(Utils.buildParseTree(fileName));
+        return new ParseTree(Utils.transformPython(fileName));
 
     }
 
