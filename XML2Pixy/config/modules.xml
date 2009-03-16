@@ -4,6 +4,10 @@
     <!-- standard functions and modules -->
     <Module name="__builtin__">
         <Function name="raw_input"/>
+	
+	<Function name="exec"/>
+
+	<Function name="eval"/>
 
         <Function name="enumerate">
             <![CDATA[
@@ -227,6 +231,7 @@ function __method__execute3(&$query, &$param1, &$param2) {
         </Function>
     </Module>
 
+    <Module name="compiler.ast"/>
     <Module name="cgi"/>
     <!--<Module name="const"/>-->
     <Module name="copy"/>
@@ -252,12 +257,15 @@ function __method__execute3(&$query, &$param1, &$param2) {
     </Module>
     <Module name="random">
         <Function name="uniform"/>
+        <Function name="randint"/>
     </Module>
     <Module name="re"/>
     <Module name="socket"/>
     <Module name="stat"/>
     <Module name="string"/>
-    <Module name="sys"/>
+    <Module name="sys">
+        <Variable name="argv"/>
+    </Module>
     <Module name="time">
         <Function name="sleep"/>
         <Function name="time"/>

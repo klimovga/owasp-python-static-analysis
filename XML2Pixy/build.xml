@@ -6,7 +6,9 @@
 
     <property file="build.properties"/>
 
-    <target name="build" depends="clean, compile">
+    <target name="rebuild" depends="clean, build"/>
+
+    <target name="build" depends="compile">
         <copy todir="${classes.dir}">
             <fileset dir="${resources.dir}"/>
         </copy>
@@ -79,7 +81,7 @@
              includes="**/*">
             <manifest>
                 <attribute name="Main-Class" value="su.msu.cs.lvk.xml2pixy.Converter"/>
-                <attribute name="Class-Path" value="commons-cli-1.1.jar jdom.jar phpparser.jar pixy.jar rationals.jar log4j-1.2.14.jar"/>
+                <attribute name="Class-Path" value="commons-cli-1.1.jar jdom.jar phpparser.jar pixy.jar rationals.jar log4j-1.2.14.jar commons-lang-2.4.jar"/>
             </manifest>
         </jar>
         <copy todir="${build.dir}">

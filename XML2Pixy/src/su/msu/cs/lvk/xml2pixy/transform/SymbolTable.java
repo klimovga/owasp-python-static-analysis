@@ -1,8 +1,10 @@
 package su.msu.cs.lvk.xml2pixy.transform;
 
-import org.jdom.Element;
-import su.msu.cs.lvk.xml2pixy.Converter;
+import su.msu.cs.lvk.xml2pixy.Printable;
+import su.msu.cs.lvk.xml2pixy.Utils;
+import su.msu.cs.lvk.xml2pixy.jdom.ModuleHandler;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,78 +15,41 @@ import java.util.Map;
  *
  * @author gklimov
  */
-public class SymbolTable {
+public class SymbolTable implements Printable {
 
     private List<String> imported;
     private int builtins;
+    private boolean finished;
 
     private Map<String, Symbol> symbolTable;
     public static final String CONFIG_MODULES_XML = "/config/modules.xml";
     public static final String BUILTIN_MODULE = "__builtin__";
 
     /**
-     * Initializes the symbol table with builtin modules, functions etc taken from <code>CONFIG_MODULES_XML</code>
+     * Creates the symbol tables and initializes it if necessary
+     *
+     * @param doInit if true, then init symbol table with builtin symbols taken from <code>CONFIG_MODULES_XML</code>
      */
-    public SymbolTable() {
+    public SymbolTable(boolean doInit) {
         symbolTable = new HashMap<String, Symbol>();
         imported = new ArrayList<String>();
 
-        // Walk through builtin modules
-        for (Object obj : Converter.modulesConfig.getRootElement().getChildren("Module")) {
-            Element module = (Element) obj;
-            String moduleName = module.getAttributeValue("name");
-            StringBuffer buf = new StringBuffer();
-            for (String m : moduleName.split("\\.")) {
-                if (buf.length() > 0) buf.append('.');
-                buf.append(m);
-                if (!imported.contains(buf.toString())) {
-                    imported.add(buf.toString());
-                }
-            }
-
-            addSymbol(moduleName, Symbol.Type.MODULE);
-
-            // Walk through builtin functions
-            for (Object func : module.getChildren("Function")) {
-                Element function = (Element) func;
-                String functionName = function.getAttributeValue("name");
-                String fullFunctionName = functionName;
-                if (!moduleName.equals(BUILTIN_MODULE)) {
-                    fullFunctionName = moduleName.replaceAll("\\.", "__") + "__" + fullFunctionName;
-                }
-                Symbol funSym = new Symbol(
-                        functionName, Symbol.Type.FUNCTION, CONFIG_MODULES_XML, moduleName);
-
-/*
-                Map<String, ParseNode> args = new LinkedHashMap<String, ParseNode>();
-
-                for (Object arg : function.getChildren("Argument")) {
-                    Element argument = (Element) arg;
-                    String argName = argument.getAttributeValue("name");
-                    if (!Utils.isBlank(argName)) {
-                        args.put(argName.trim(), null);
-                    }
-                }
-                if (!args.isEmpty()) {
-                    funSym.setArgs(args);
-                }
-*/
-
-                addSymbol(fullFunctionName, funSym);
-
-                // todo: the same, but __builtin____functionName for correct responding on builtin classes ?
-/*
-                addSymbol(moduleName + "__" + fullFunctionName, new Symbol(
-                        functionName, Symbol.Type.FUNCTION, "/config/modules.xml", moduleName, true));
-*/
-            }
-
-
+        if (doInit) {
+            init();
         }
-
-        builtins = imported.size();
     }
 
+    /**
+     * Initializes the symbol table with builtin modules, functions etc taken from <code>CONFIG_MODULES_XML</code>
+     */
+    public SymbolTable() {
+        this(true);
+    }
+
+    public void init() {
+        ModuleHandler.fillWithBuiltins(this);
+    }
+    
     public Symbol getSymbol(String name) {
         return symbolTable.get(name);
     }
@@ -142,5 +107,24 @@ public class SymbolTable {
 
     public Map<String, Symbol> getAllSymbols() {
         return symbolTable;
+    }
+
+    public void print(PrintStream out) {
+        for (Map.Entry<String, Symbol> entry : symbolTable.entrySet()) {
+            entry.getValue().print(out);
+            out.println();
+        }
+    }
+
+    public String toString() {
+        return Utils.toString(this);
+    }
+
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
     }
 }
